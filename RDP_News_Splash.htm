@@ -1,242 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RDP News: Platform Selection</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RDP News: Platform Selection</title>
 
-  <style>
-    /* § COMMENT: Design tokens */
-    :root {
-      --bg: #0d1117;
-      --text: #ffffff;
-      --gap: 20px;
-      --platform-size: 170px;
-      --logo-size: 220px;
-      --transition-speed: 0.18s;
-    }
+<style>
 
-    /* § COMMENT: Normalize */
-    * { box-sizing: border-box; }
+/* §§ COMMENT: Design tokens §§ */
+:root {
+  --bg: #0d1117;
+  --text: #ffffff;
+  --gap: 20px;
+  --platform-size: 170px;
+  --logo-size: 220px;
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-    }
+/* §§ COMMENT: Reset §§ */
+* { box-sizing: border-box; }
 
-    /* § COMMENT: Centered layout */
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 20px;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  text-align: center;
+}
 
-    /* § COMMENT: Width constraint */
-    .page-wrap {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-    }
+/* §§ COMMENT: Layout container §§ */
+.wrap {
+  max-width: 900px;
+  width: 100%;
+}
 
-    /* § COMMENT: Logo */
-    .logo {
-      width: min(var(--logo-size), 45vw);
-      display: block;
-      margin: 0 auto 20px;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
+/* §§ COMMENT: Logo §§ */
+.logo {
+  width: min(var(--logo-size), 45vw);
+  margin-bottom: 20px;
+}
 
-    /* § COMMENT: Heading */
-    h1 {
-      margin: 0 0 28px;
-      font-size: clamp(1.8rem, 2.6vw, 2.5rem);
-      font-weight: 700;
-    }
+/* §§ COMMENT: Heading §§ */
+h1 {
+  margin-bottom: 30px;
+}
 
-    /* § COMMENT: Layout */
-    .platform-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: var(--gap);
-    }
+/* §§ COMMENT: Platform grid §§ */
+.grid {
+  display: flex;
+  justify-content: center;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}
 
-    /* § COMMENT: Button shell */
-    .platform-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: var(--platform-size);
-      height: var(--platform-size);
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      border-radius: 18px;
-      transition: transform var(--transition-speed) ease;
-      touch-action: manipulation;
-    }
+/* §§ COMMENT: Button shell with depth §§ */
+.btn {
+  width: var(--platform-size);
+  height: var(--platform-size);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 18px;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
 
-    /* § COMMENT: Hover / press */
-    .platform-btn:hover { transform: translateY(-2px); }
-    .platform-btn:active { transform: scale(0.97); }
+/* §§ COMMENT: Hover lift + glow §§ */
+.btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(46, 231, 16, 0.15);
+}
 
-    /* § COMMENT: Image fit */
-    .platform-btn img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      pointer-events: none;
-    }
+/* §§ COMMENT: Press feedback §§ */
+.btn:active {
+  transform: scale(0.96);
+}
 
-    /* § COMMENT: Responsive */
-    @media (max-width: 768px) {
-      :root {
-        --platform-size: 145px;
-        --logo-size: 190px;
-        --gap: 16px;
-      }
-    }
+/* §§ COMMENT: Image fit §§ */
+.btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
 
-    @media (max-width: 480px) {
-      :root {
-        --platform-size: 120px;
-        --logo-size: 160px;
-        --gap: 14px;
-      }
-    }
-  </style>
+/* ============================================================
+   PREMIUM CTA LINK
+   ============================================================ */
+
+/* §§ COMMENT: Base CTA styling §§ */
+.jump-link {
+  position: relative;
+  display: inline-block;
+  margin-top: 36px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+  color: #2ee710;
+  transition:
+    color 0.25s ease,
+    text-shadow 0.25s ease;
+}
+
+/* §§ COMMENT: Underline system §§ */
+.jump-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: #A904E2;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s ease 0.05s;
+}
+
+/* §§ COMMENT: Hover color + glow §§ */
+.jump-link:hover {
+  color: #A904E2;
+  text-shadow: 0 0 8px rgba(169, 4, 226, 0.5);
+}
+
+/* §§ COMMENT: Animate underline §§ */
+.jump-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* §§ COMMENT: Responsive scaling §§ */
+@media (max-width: 600px) {
+  :root {
+    --platform-size: 130px;
+    --logo-size: 180px;
+  }
+}
+
+</style>
 </head>
 
 <body>
 
-  <main class="page-wrap">
+<div class="wrap">
 
-    <img src="img/RDP_News_Logo.png" alt="RDP News Logo" class="logo" />
+  <!-- §§ COMMENT: Logo anchor §§ -->
+  <img src="img/RDP_News_Logo.png" class="logo">
 
-    <h1>Select Your Preferred Platform</h1>
+  <h1>Select Your Preferred Platform</h1>
 
-    <div class="platform-grid">
+  <div class="grid">
 
-      <!-- § COMMENT: YouTube -->
-      <button class="platform-btn"
-        data-ios="youtube://"
-        data-android="vnd.youtube://"
-        data-web="https://www.youtube.com"
-        data-default-img="img/png_YouTube.png"
-        data-hover-img="img/png_YouTube_ovr.png">
-        <img src="img/png_YouTube.png" alt="YouTube">
-      </button>
+    <!-- §§ COMMENT: YouTube button §§ -->
+    <button class="btn"
+      data-ios="youtube://"
+      data-android="vnd.youtube://"
+      data-web="https://www.youtube.com"
+      data-default="img/png_YouTube.png"
+      data-hover="img/png_YouTube_ovr.png">
+      <img src="img/png_YouTube.png">
+    </button>
 
-      <!-- § COMMENT: Instagram (UPDATED TARGET) -->
-      <button class="platform-btn"
-        data-ios="instagram://user?username=reddeerpolytechnic"
-        data-android="intent://instagram.com/_u/reddeerpolytechnic/#Intent;package=com.instagram.android;scheme=https;end"
-        data-web="https://www.instagram.com/reddeerpolytechnic/"
-        data-default-img="img/png_Instagram.png"
-        data-hover-img="img/png_Instagram_ovr.png">
-        <img src="img/png_Instagram.png" alt="Instagram">
-      </button>
+    <!-- §§ COMMENT: Instagram button §§ -->
+    <button class="btn"
+      data-ios="instagram://user?username=reddeerpolytechnic"
+      data-android="intent://instagram.com/_u/reddeerpolytechnic/#Intent;package=com.instagram.android;scheme=https;end"
+      data-web="https://www.instagram.com/reddeerpolytechnic/"
+      data-default="img/png_Instagram.png"
+      data-hover="img/png_Instagram_ovr.png">
+      <img src="img/png_Instagram.png">
+    </button>
 
-      <!-- § COMMENT: TikTok -->
-      <button class="platform-btn"
-        data-ios="snssdk1128://"
-        data-android="snssdk1128://"
-        data-web="https://www.tiktok.com"
-        data-default-img="img/png_TikTok.png"
-        data-hover-img="img/png_TikTok_ovr.png">
-        <img src="img/png_TikTok.png" alt="TikTok">
-      </button>
+    <!-- §§ COMMENT: TikTok button §§ -->
+    <button class="btn"
+      data-ios="snssdk1128://"
+      data-android="snssdk1128://"
+      data-web="https://www.tiktok.com"
+      data-default="img/png_TikTok.png"
+      data-hover="img/png_TikTok_ovr.png">
+      <img src="img/png_TikTok.png">
+    </button>
 
-    </div>
+  </div>
 
-  </main>
+  <!-- §§ COMMENT: Secondary CTA §§ -->
+  <a href="http://google.com"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="jump-link">
+     Informed Consent Link
+  </a>
 
-  <script>
+</div>
 
-    // ============================================================
-    // DEVICE DETECTION
-    // ============================================================
-    // § COMMENT: OS routing
-    function getDevice() {
-      const ua = navigator.userAgent;
-      if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
-      if (/Android/i.test(ua)) return "Android";
-      return "Desktop";
-    }
+<script>
 
-    // ============================================================
-    // APP LAUNCH + FALLBACK
-    // ============================================================
-    // § COMMENT: Try app first, fallback if no context switch
-    function openApp(ios, android, web) {
+// ============================================================
+// DEVICE DETECTION
+// ============================================================
+// §§ COMMENT: OS routing §§
+function getDevice() {
+  const ua = navigator.userAgent;
+  if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+  if (/Android/i.test(ua)) return "Android";
+  return "Desktop";
+}
 
-      const device = getDevice();
+// ============================================================
+// APP LAUNCH + FALLBACK
+// ============================================================
+// §§ COMMENT: Attempt deep link then fallback §§
+function openApp(ios, android, web) {
 
-      if (device === "Desktop") {
-        window.location.href = web;
-        return;
-      }
+  const device = getDevice();
 
-      const link = device === "iOS" ? ios : android;
+  if (device === "Desktop") {
+    window.location.href = web;
+    return;
+  }
 
-      let leftPage = false;
+  const link = device === "iOS" ? ios : android;
 
-      const markLeave = () => leftPage = true;
+  let leftPage = false;
 
-      window.addEventListener("pagehide", markLeave, { once: true });
-      window.addEventListener("blur", markLeave, { once: true });
+  const markLeave = () => leftPage = true;
 
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) leftPage = true;
-      });
+  window.addEventListener("pagehide", markLeave, { once: true });
+  window.addEventListener("blur", markLeave, { once: true });
 
-      // § COMMENT: Launch app
-      window.location.href = link;
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) leftPage = true;
+  });
 
-      // § COMMENT: Fallback
-      setTimeout(() => {
-        if (!leftPage) window.location.href = web;
-      }, 1800);
-    }
+  // §§ COMMENT: Launch attempt §§
+  window.location.href = link;
 
-    // ============================================================
-    // IMAGE STATE SWAPS
-    // ============================================================
-    // § COMMENT: Toggle asset
-    function swap(btn, state) {
-      const img = btn.querySelector("img");
-      img.src = state ? btn.dataset.hoverImg : btn.dataset.defaultImg;
-    }
+  // §§ COMMENT: Fallback window §§
+  setTimeout(() => {
+    if (!leftPage) window.location.href = web;
+  }, 1800);
+}
 
-    document.querySelectorAll(".platform-btn").forEach(btn => {
+// ============================================================
+// IMAGE STATE SWAPS
+// ============================================================
+// §§ COMMENT: Swap asset state §§
+function swap(btn, state) {
+  const img = btn.querySelector("img");
+  img.src = state ? btn.dataset.hover : btn.dataset.default;
+}
 
-      btn.addEventListener("mouseenter", () => swap(btn, true));
-      btn.addEventListener("mouseleave", () => swap(btn, false));
+// §§ COMMENT: Bind UI events §§
+document.querySelectorAll(".btn").forEach(btn => {
 
-      btn.addEventListener("mousedown", () => swap(btn, true));
-      btn.addEventListener("mouseup", () => swap(btn, false));
+  btn.addEventListener("mouseenter", () => swap(btn, true));
+  btn.addEventListener("mouseleave", () => swap(btn, false));
 
-      btn.addEventListener("touchstart", () => swap(btn, true), { passive: true });
-      btn.addEventListener("touchend", () => setTimeout(() => swap(btn, false), 120));
+  btn.addEventListener("mousedown", () => swap(btn, true));
+  btn.addEventListener("mouseup", () => swap(btn, false));
 
-      btn.addEventListener("click", () => {
-        openApp(
-          btn.dataset.ios,
-          btn.dataset.android,
-          btn.dataset.web
-        );
-      });
+  btn.addEventListener("touchstart", () => swap(btn, true), { passive: true });
+  btn.addEventListener("touchend", () => setTimeout(() => swap(btn, false), 100));
 
-    });
+  btn.addEventListener("click", () => {
+    openApp(
+      btn.dataset.ios,
+      btn.dataset.android,
+      btn.dataset.web
+    );
+  });
 
-  </script>
+});
+
+</script>
 
 </body>
 </html>
